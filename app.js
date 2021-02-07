@@ -19,7 +19,7 @@ function displayDish(dishes){
     dishItems.innerHTML = "";
     let searchedDish = recipe.value;
     recipe.value = "";
-    if( dishes.meals != null){
+    if( dishes.meals != null && searchedDish != ""){
         dishes.meals.forEach(dish => {
           let div = document.createElement('div');
           let item = `
