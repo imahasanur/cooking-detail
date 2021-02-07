@@ -4,6 +4,7 @@ let searchBox = document.getElementById('search-box');
 let dishDetail = document.getElementById('dish-detail');
 let recipe = document.getElementById('recipe');
 let uniqueDishes = {};
+
 searchButton.addEventListener('click', loadDishes);
 
 function loadDishes(){
@@ -16,11 +17,12 @@ function loadDishes(){
 
 function displayDish(dishes){
     dishItems.innerHTML = "";
+    let searchedDish = recipe.value;
     recipe.value = "";
-    if( dishes.meals!= null){
+    if( dishes.meals != null){
         dishes.meals.forEach(dish => {
-            let div = document.createElement('div');
-            let item = `
+          let div = document.createElement('div');
+          let item = `
             <div class="card">
               <img src="${dish.strMealThumb}" class="card-img-top" alt="...">
               <div class="card-body">
@@ -28,17 +30,17 @@ function displayDish(dishes){
               </div>
             </div>   
             `
-            uniqueDishes[dish.strMeal] = dish.idMeal;
-            div.className = "col-10 col-sm-4 col-md-3 mb-4 mt-2"
-            div.innerHTML = item;
-            dishItems.appendChild(div);
+          uniqueDishes[dish.strMeal] = dish.idMeal;
+          div.className = "col-10 col-sm-4 col-md-3 mb-4 mt-2"
+          div.innerHTML = item;
+          dishItems.appendChild(div);
         });
     }
     else{
         dishItems.innerHTML = "";
         dishItems.innerHTML = `
-        <img src="./images/crying.jpg" id="error-image" alt = "not found">
-        <h2 class='text-center' id="error-text" style={color:red;}> This dish is not Found. </h2>
+          <img src="./images/crying.jpg" id="error-image" alt = "not found">
+          <h2 class='text-center' id="error-text" style={color:red;}> This ${searchedDish} dish is not Found. </h2>
         `;
         uniqueDishes = {};
     }
@@ -49,7 +51,7 @@ dishItems.addEventListener('click', (event)=>{
     let dishName = event.target.parentNode.innerText;
     let dishId = uniqueDishes[dishName];
     uniqueDishes = {};
-    url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${dishId}`;
+    let url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${dishId}`;
     fetch(url)
     .then(response => response.json())
     .then(dish => displayDishDetail(dish))
@@ -73,7 +75,6 @@ function displayDishDetail(dish){
     let totalIngredient = 50;
     let ul = document.getElementById('ingredients');
     for(let i = 1; i <= totalIngredient; i++){
-        console.log(typeof i , "typeof i")
         let ingredient = "strIngredient"+i;
         li = document.createElement('li');
         if( dish.meals[0][ingredient] !== "" ){

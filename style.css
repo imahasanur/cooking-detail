@@ -1,5 +1,13 @@
+body{
+    background: ghostwhite;
+}
+#list-styles li a {
+    color:black;
+    float:right;
+    font-weight: 700;
+}
 #logo{
-    max-width:25%;
+    max-width:28%;
 }
 #dish-items{
     background:gainsboro;
