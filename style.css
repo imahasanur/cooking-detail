@@ -1,0 +1,16 @@
+#logo{
+    max-width:25%;
+}
+#dish-items{
+    background:gainsboro;
+}
+#error-image{
+    margin:0 auto;
+    width:fit-content;
+}
+#error-text{
+    color:peru;
+}
+ul li{
+    list-style-type:none;
+}
